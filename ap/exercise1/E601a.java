@@ -1,3 +1,5 @@
+package ap.exercise1;
+
 public class E601a {
     public static void main(String[] args) {
         short sum = 0;

@@ -1,3 +1,5 @@
+package ap.exercise1;
+
 import java.util.Scanner;
 
 public class E502 {

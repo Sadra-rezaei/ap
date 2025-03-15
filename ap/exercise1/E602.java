@@ -1,5 +1,6 @@
+package ap.exercise1;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class E602 {
