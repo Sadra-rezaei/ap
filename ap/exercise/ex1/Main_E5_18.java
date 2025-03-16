@@ -1,9 +1,9 @@
-package ap.exercise1;
+package ap.exercise.ex1;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class E5018 {
+public class Main_E5_18 {
     public static void main(String[] args) {
         System.out.println("Enter three strings:");
         Scanner sc = new Scanner(System.in);

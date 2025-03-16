@@ -1,9 +1,9 @@
-package ap.exercise1;
+package ap.exercise.ex1;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class E602 {
+public class Main_E6_2 {
     public static void main(String[] args) {
         System.out.println("Enter some numbers: ");
         Scanner sc = new Scanner(System.in);

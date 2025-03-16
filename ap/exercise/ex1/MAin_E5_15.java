@@ -1,8 +1,8 @@
-package ap.exercise1;
+package ap.exercise.ex1;
 
 import java.util.Scanner;
 
-public class E5015 {
+public class MAin_E5_15 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter number: ");

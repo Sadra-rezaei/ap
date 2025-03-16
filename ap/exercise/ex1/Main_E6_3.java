@@ -1,8 +1,8 @@
-package ap.exercise1;
+package ap.exercise.ex1;
 
 import java.util.Scanner;
 
-public class E603 {
+public class Main_E6_3 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
