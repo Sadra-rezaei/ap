@@ -19,12 +19,15 @@ public class EX2_PM_1_3 {
         System.out.print("Enter a number: ");
         int k = sc.nextInt();
 
+        int c;
+        while (true) {
+            System.out.print("Enter the number of dots: ");
+            c = sc.nextInt();
+            if (c >= k * k)
+                System.out.println("=== Your number should be less than " + k * k + "! ===");
 
-        System.out.print("Enter the number of dots: ");
-        int c = sc.nextInt();
-        if (c >= k*k) {
-            System.out.println("=== Your number should be less than " + k*k + "! ===");
-            System.exit(0);  //not good. will be better
+            else
+                break;
         }
 
         String[][] matrix = new String[k + 2][k + 2];
