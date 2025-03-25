@@ -1,4 +1,4 @@
-package ap.EX2;
+package ap.exercise.ex2;
 
 import java.util.Scanner;
 
