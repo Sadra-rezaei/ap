@@ -94,12 +94,13 @@ public class EX3_LM_1_2_A {
         }
 
         ArrayList<Book1> booksList = new ArrayList<>(3);
+        CreateFile.createFile("Books.txt");
+
         for (int i = 0; i <= 3; i++) {
             booksList.add(new Book1("Book","Ali",i,i));
             WriteToFile.writeToFile("Books.txt",booksList.get(i).getName());
         }
 
-        CreateFile.createFile("Books.txt");
 
 
 
