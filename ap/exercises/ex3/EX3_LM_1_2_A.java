@@ -57,7 +57,7 @@ import java.util.ArrayList;
 public class EX3_LM_1_2_A {
     public static void main(String[] args) throws IOException {
 
-        ArrayList<Student1> studentsList = new ArrayList<Student1>();
+        ArrayList<Student1> studentsList = new ArrayList<>();
 
         PrintWriter studentWriter = new PrintWriter("Students.txt");
         for (int i = 0; i <= 2; i++) {
@@ -68,7 +68,7 @@ public class EX3_LM_1_2_A {
 
 
 
-        ArrayList<Book1> booksList = new ArrayList<>(3);
+        ArrayList<Book1> booksList = new ArrayList<>();
 
         PrintWriter bookWriter = new PrintWriter("Books.txt");
         for (int i = 0; i <= 3; i++) {
