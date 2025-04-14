@@ -32,36 +32,26 @@ import java.util.ArrayList;
         }
 
         public String getFullName() {
-            return name + " author: " + author + " with " + pages + " pages. publish year: " + year;
+            return name + "\t" + author + "\t" + pages + "\t" + year;
         }
     }
 
     class Student1 {
         private String firstName;
         private String lastName;
-//        private int studentNumber;
-//        private String course;
-        private String fullName;
+        private int studentNumber;
+        private String course;
 
 
         public Student1(String firstName, String lastName, int studentNumber, String course) {
             this.firstName = firstName;
             this.lastName = lastName;
-//            this.studentNumber = studentNumber;
-//            this.course = course;
-            this.fullName = firstName + " " + lastName + " with student number: " + studentNumber;
-        }
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
+            this.studentNumber = studentNumber;
+            this.course = course;
         }
 
         public String getFullName() {
-            return fullName;
+            return firstName + "\t" + lastName + "\t" + studentNumber + "\t" + course;
         }
     }
 public class EX3_LM_1_2_A {
