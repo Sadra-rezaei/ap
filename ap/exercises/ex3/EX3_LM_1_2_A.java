@@ -3,36 +3,20 @@ package ap.exercises.ex3;
 import java.io.*;
 import java.util.ArrayList;
 
-class CreateFile {
-    public static void createFile(String fileName) {
-        try {
-            File myObj = new File(fileName);
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
 
-}
 
-class WriteToFile {
-    public static void writeToFile(String fileName, String content) {
-        try {
-            FileWriter myWriter = new FileWriter(fileName);
-            myWriter.write(content + "\n");
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-}
+//class WriteToFile {
+//    public static void writeToFile(String fileName, String content) {
+//        try {
+//            PrintWriter myWriter = new PrintWriter(fileName);
+//            myWriter.println(content + "\n");
+//            System.out.println("Successfully wrote to the file.");
+//        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
+//    }
+//}
 
     class Book1 {
         private String name;
@@ -47,24 +31,24 @@ class WriteToFile {
             this.year = year;
         }
 
-        public String getName() {
-            return name;
+        public String getFullName() {
+            return name + " author: " + author + " with " + pages + " pages. publish year: " + year;
         }
     }
 
     class Student1 {
         private String firstName;
         private String lastName;
-        private int studentNumber;
-        private String course;
+//        private int studentNumber;
+//        private String course;
         private String fullName;
 
 
         public Student1(String firstName, String lastName, int studentNumber, String course) {
             this.firstName = firstName;
             this.lastName = lastName;
-            this.studentNumber = studentNumber;
-            this.course = course;
+//            this.studentNumber = studentNumber;
+//            this.course = course;
             this.fullName = firstName + " " + lastName + " with student number: " + studentNumber;
         }
 
@@ -83,28 +67,25 @@ class WriteToFile {
 public class EX3_LM_1_2_A {
     public static void main(String[] args) throws IOException {
 
-        ArrayList<Student1> studentsList = new ArrayList<>(2);
-        CreateFile.createFile("Students.txt");
+        ArrayList<Student1> studentsList = new ArrayList<Student1>();
 
+        PrintWriter studentWriter = new PrintWriter("Students.txt");
         for (int i = 0; i <= 2; i++) {
             studentsList.add(new Student1("Ali", "Rezaei",i,"Computer Science"));
-//            System.out.println(studentsList.get(i).getFirstName() + " " + studentsList.get(i).getLastName());
-            WriteToFile.writeToFile("Students.txt", studentsList.get(i).getFullName());
-
+            studentWriter.println(studentsList.get(i).getFullName());
         }
+        studentWriter.close();
+
+
 
         ArrayList<Book1> booksList = new ArrayList<>(3);
-        CreateFile.createFile("Books.txt");
 
+        PrintWriter bookWriter = new PrintWriter("Books.txt");
         for (int i = 0; i <= 3; i++) {
             booksList.add(new Book1("Book","Ali",i,i));
-            WriteToFile.writeToFile("Books.txt",booksList.get(i).getName());
+            bookWriter.println(booksList.get(i).getFullName());
         }
-
-
-
-
-
+        bookWriter.close();
 
 
 
