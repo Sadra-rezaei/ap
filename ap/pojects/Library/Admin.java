@@ -1,5 +1,7 @@
 package ap.pojects.Library;
 
+import java.util.ArrayList;
+
 public class Admin extends User{
 
     public Admin(String firstname, String lastname) {
@@ -9,10 +11,12 @@ public class Admin extends User{
 
     @Override
     public String getName() {
-        return super.getName();
+        return firstname + " " + lastname;
     }
 
-//    public void addNewOperator() {
-//
-//    }
+    @Override
+    public String getID() {
+        return "10";
+    }
+
 }

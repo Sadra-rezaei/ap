@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Login {
-    final String NUMBER_VALID = "^[0-9]+";
+    final String NUMBER_VALID = "^[0-9]+$";
     final String STRING_VALID = "[a-zA-Z ]+";
-//    final String DATE_VALID = "^[0-9-]+";
 
 
     public String userStringInput(Scanner scanner, String prompt, String regex) {
@@ -23,7 +22,7 @@ public class Login {
         }
     }
 
-    public Student signUp(ArrayList<Student> students) {
+    public int signUp(ArrayList<Student> students) {
         Scanner scanner = new Scanner(System.in);
         Student selectedStudent;
 
@@ -34,55 +33,33 @@ public class Login {
 
         LocalDate date = LocalDate.now();
 
-        for (Student student : students) {
-            if (student.getStudentID().equals(studentId)) {
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getStudentID().equals(studentId)) {
                 System.out.println("Student already exists!");
-                scanner.close();
-                return student;
+                return i;
             }
         }
 
         selectedStudent = new Student(firstname, lastname, course, studentId, date);
         students.add(selectedStudent);
-        System.out.println("==== Welcome! ====\n");
-        scanner.close();
-        return selectedStudent;
+        System.out.println("==== Welcome "+ selectedStudent.getName()+"! ====\n");
+        return students.size() - 1;
     }
 
 
-    //=====================================================================================
-    public Student studentSignIn(ArrayList<Student> students) {
+    public <T extends User> int signIn(ArrayList<T> users) {
         Scanner scanner = new Scanner(System.in);
+        String tempID = userStringInput(scanner, "Enter your ID: ", NUMBER_VALID);
 
-        while (true) {
-            String studentID = userStringInput(scanner, "Enter your Student ID: ", NUMBER_VALID);
-            for (Student student : students) {
-                if (student.getStudentID().equals(studentID)) {
-                    System.out.println("==== Welcome! ====\n");
-                    scanner.close();
-                    return student;
-                }
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getID().equals(tempID)) {
+                System.out.println("==== Welcome "+ users.get(i).getName()+"! ====\n");
+                return i;
             }
-
-            System.out.println("User not found");
         }
-    }
+        System.out.println("Invalid ID");
+        return -1;
 
-    public Operator operatorSignIn(ArrayList<Operator> operators) {
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("=== 1 or 2 ===");
-            String operatorID = userStringInput(scanner, "Enter your Operator ID: ", NUMBER_VALID);
-            for (Operator operator : operators) {
-                if (operator.getOperatorID().equals(operatorID)) {
-                    System.out.println("==== Welcome! ====\n");
-                    scanner.close();
-                    return operator;
-                }
-            }
-            System.out.println("Operator not found\n");
-        }
     }
 
     public void creatOperator(ArrayList<Operator> operators) {
@@ -93,7 +70,7 @@ public class Login {
         String operatorID = userStringInput(scanner, "Enter your Operator ID: ", NUMBER_VALID);
 
         for (Operator operator : operators) {
-            if (operator.getOperatorID().equals(operatorID)) {
+            if (operator.getID().equals(operatorID)) {
                 System.out.println("Operator already exists!\n");
                 break;
             }

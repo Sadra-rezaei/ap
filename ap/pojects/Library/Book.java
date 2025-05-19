@@ -1,8 +1,9 @@
 package ap.pojects.Library;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Book{
+public class Book implements Serializable {
     private String title;
     private String author;
     private int pages;
@@ -43,11 +44,19 @@ public class Book{
         return isbn;
     }
 
+    public boolean isBorrowed() {
+        return borrowed;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public void changeBorrowed(){
+        borrowed = !borrowed;
     }
 }

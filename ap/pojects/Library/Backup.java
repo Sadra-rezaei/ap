@@ -4,9 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Backup {
-    private static final String STUDENT_FILE = "students.dat";
-    private static final String BOOK_FILE = "books.dat";
-    private static final String OPERATOR_FILE = "students.dat";
+    private final String STUDENT_FILE = "students.dat";
+    private final String BOOK_FILE = "books.dat";
+    private final String OPERATOR_FILE = "operator.dat";
+    private final String REQUEST_FILE = "requests.dat";
 
     public void saveStudents(ArrayList<Student> students) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(STUDENT_FILE))) {
@@ -30,6 +31,28 @@ public class Backup {
         }
     }
 
+    public void saveBooks(ArrayList<Book> books) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(BOOK_FILE))) {
+            out.writeObject(books);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Book> loadBooks() {
+        File file = new File(BOOK_FILE);
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+            return (ArrayList<Book>) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
     public void saveOperators(ArrayList<Operator> operators) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(OPERATOR_FILE))) {
             out.writeObject(operators);
@@ -46,6 +69,28 @@ public class Backup {
 
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
             return (ArrayList<Operator>) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    public void saveRequests(ArrayList<Request> requests) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(REQUEST_FILE))) {
+            out.writeObject(requests);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Request> loadRequests() {
+        File file = new File(REQUEST_FILE);
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+            return (ArrayList<Request>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return new ArrayList<>();

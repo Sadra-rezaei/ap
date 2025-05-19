@@ -4,9 +4,9 @@ public abstract class User {
     protected String firstname;
     protected String lastname;
 
-    public String getName() {
-        return firstname + " " + lastname;
-    }
+    public abstract String getName();
+
+    public abstract String getID();
 
 
 

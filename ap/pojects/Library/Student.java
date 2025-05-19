@@ -17,16 +17,25 @@ public class Student extends User implements Serializable {
         this.course = course;
         this.studentID = studentID;
         this.dateOfJoining = dateOfJoining;
+        this.borrowedBooks = new ArrayList<>();
     }
 
+    @Override
+    public String getID() {
+        return studentID;
+    }
 
     public String getStudentID() {
         return studentID;
     }
 
+    public ArrayList<Borrow> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
     @Override
     public String getName() {
-        return super.getName();
+        return firstname + " " + lastname;
     }
 
     @Override

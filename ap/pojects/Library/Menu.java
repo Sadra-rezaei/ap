@@ -13,6 +13,8 @@ public class Menu {
                         2. Operator
                         
                         3. Admin
+                        
+                        99. Exit
                         """
         );
     }
@@ -35,30 +37,32 @@ public class Menu {
                         1. Show Books\
                         
                         2. Search Book\
-                        """ +
                         
-//                        3. Borrow Book\
-//
-//                        4. Return Book\
-                       """ 
-                        \n99. Exit"""
+                        3. Borrow Book\
+
+                        4. Return Book\
+                        
+                        5. Show borrowed books
+                       
+                        99. Logout"""
         );
     }
 
     public void showAdminMenu() {
         System.out.println(
 
-//                        1. List of borrowed Books\
-//
-//                        2. List of late returned Books\
-//
-//                        3. Taken Books from operators\
-//
-//                        4. Most borrowed Book\
                 """
-                        1. Add a new operator
+                        1. Add a new operator\
                         
-                        99. Exit"""
+                        2. List of borrowed Books\
+
+                        3. List of late returned Books\
+
+                        4. Taken Books from operators\
+
+                        5. Most borrowed Book in this year\
+                        
+                        99. Logout"""
         );
     }
 
@@ -69,9 +73,13 @@ public class Menu {
                         
                         2. Edit information\
                         
-                        3. Add Book\
+                        3. Add a new Book\
                         
-                        99. Exit
+                        4. Approve borrow requests\
+                        
+                        5. Approve return requests\
+                        
+                        99. Logout
                         """
         );
     }

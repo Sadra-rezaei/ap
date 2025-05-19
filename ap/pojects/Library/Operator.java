@@ -1,6 +1,7 @@
 package ap.pojects.Library;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Operator extends User implements Serializable{
     private String operatorID;
@@ -9,6 +10,16 @@ public class Operator extends User implements Serializable{
         super.firstname = firstName;
         super.lastname = lastName;
         this.operatorID = operatorID;
+    }
+
+    @Override
+    public String getName() {
+        return firstname + " " + lastname;
+    }
+
+    @Override
+    public String getID() {
+        return operatorID;
     }
 
     public String getOperatorID() {

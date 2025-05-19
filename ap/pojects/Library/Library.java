@@ -1,7 +1,8 @@
 package ap.pojects.Library;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 public class Library {
     private ArrayList<Book> books;
@@ -10,16 +11,17 @@ public class Library {
     private Menu menu;
     private Login login;
     private Admin admin;
+    private ArrayList<Request> requests;
+
 
     public Library(Login login) {
         students = new ArrayList<>();
         books = new ArrayList<>();
         operators = new ArrayList<>();
-        operators.add(new Operator("Ali", "Amin", "1"));
-        operators.add(new Operator("Saleh", "Rezaei", "2"));
         menu = new Menu();
         this.login = login;
         admin = new Admin("Sadra", "Rezaei");
+        requests = new ArrayList<>();
     }
 
     public void searchBooks() {
@@ -62,12 +64,24 @@ public class Library {
         return operators;
     }
 
+    public ArrayList<Request> getRequests() {
+        return requests;
+    }
+
     public void setStudents(ArrayList<Student> students) {
         this.students = students;
     }
 
     public void setOperators(ArrayList<Operator> operators) {
         this.operators = operators;
+    }
+
+    public void setBooks(ArrayList<Book> books) {
+        this.books = books;
+    }
+
+    public void setRequests(ArrayList<Request> requests) {
+        this.requests = requests;
     }
 
     public Menu getMenu() {
@@ -77,7 +91,6 @@ public class Library {
     public void studentService(Student student) {
         Scanner scanner = new Scanner(System.in);
         int choice;
-        boolean find = false;
 
         do {
             menu.showStudentMenu();
@@ -94,6 +107,47 @@ public class Library {
                 case 2: //search book
                     searchBooks();
                     break;
+
+                case 3: //borrow book
+                    System.out.print("Enter the isbn of the book: ");
+                    String isbn = scanner.next();
+                    for (Book book : books) {
+                        if (book.getIsbn().equals(isbn) && !book.isBorrowed()) {
+                            Request request = new Request(student, book);
+                            requests.add(request);
+                            System.out.println("Your request has been sent\nWait for an operator to approve the request\n");
+                            break;
+
+                        } else if (book.getIsbn().equals(isbn) && book.isBorrowed()) {
+                            System.out.println("Already borrowed\n");
+
+                        }
+                    }
+                    break;
+
+                case 4: //return book
+                    int borrowIndex;
+                    System.out.println("=== Borrowed Books ===");
+                    for (int i = 0; i < student.getBorrowedBooks().size(); i++) {
+                        System.out.println((i + 1) + ". " + student.getBorrowedBooks().get(i) + "\n");
+                    }
+
+                    System.out.print("Which book would you like to return? ");
+                    borrowIndex = scanner.nextInt();
+                    borrowIndex --;
+                    for (Request request : requests) {
+                        if (request.getBook().equals(student.getBorrowedBooks().get(borrowIndex).getBook()) && request.getBorrowApproved().equals(RequestType.APPROVED)) {
+                            request.setReturnApproved(RequestType.UNDER_REVIEW);
+                            System.out.println("Your request has been sent to the operator\n");
+                            break;
+                        }
+                    }
+                    break;
+
+                case 5: //show borrowed books
+                    for (Borrow borrowedBook : student.getBorrowedBooks()) {
+                        System.out.println(borrowedBook);
+                    }
             }
 
 
@@ -171,8 +225,36 @@ public class Library {
                     } while (operatorChoice != 99);
                     break;
 
-                case 3:
+                case 3: //add book
                     books.add(login.createBook());
+                    break;
+
+                case 4: //approve borrow
+                    int borrowApproveIndex;
+
+                    for (int i = 0; i < requests.size(); i++) {
+                        System.out.println((i + 1) +". "+ requests.get(i) + "\n\tBorrow: " + requests.get(i).getBorrowApproved() + "\n");
+                    }
+                    System.out.print("Which request would you want to approve? ");
+                    borrowApproveIndex = scanner.nextInt();
+                    borrowApproveIndex --;
+
+                    requests.get(borrowApproveIndex).approveBorrow(operator);
+                    System.out.println("=== Approved! ===\n");
+                    break;
+
+                case 5: //approve return
+                    int returnApproveIndex;
+
+                    for (int i = 0; i < requests.size(); i++) {
+                        System.out.println((i + 1) +". "+ requests.get(i) + "\n\tReturn: " + requests.get(i).getReturnApproved() + "\n\tBorrow Date: " + requests.get(i).getBorrow().getBorrowDate() + "\n");
+                    }
+                    System.out.print("Which request would you want to approve? ");
+                    returnApproveIndex = scanner.nextInt();
+                    returnApproveIndex --;
+
+                    requests.get(returnApproveIndex).approveReturn(operator);
+                    System.out.println("=== Approved! ===\n");
                     break;
 
             }
@@ -180,6 +262,7 @@ public class Library {
     }
 
     public void adminService() {
+        System.out.println("Welcome "+admin.getName());
         Scanner scanner = new Scanner(System.in);
         int choice;
 
@@ -189,75 +272,124 @@ public class Library {
             choice = scanner.nextInt();
 
             switch (choice) {
-                case 1:
+                case 1: // add a new operator
                     login.creatOperator(operators);
+                    break;
+
+                case 2: //list of borrowed books
+                    for (Request request : requests) {
+                        if ((request.getReturnApproved().equals(RequestType.UNDER_REVIEW)) && (request.getReturnApproved().equals(RequestType.REQUEST_NOT_MADE))) {
+                            System.out.println(
+                                    "=== Borrowed books ===\n\n" +
+                                            request +
+                                            "\n\tApproved by: " + request.getBorrowApprover() +
+                                            "\n\tBorrow Date: " + request.getBorrow().getBorrowDate() +
+                                            "\n\tReturn: " + request.getReturnApproved() +
+                                            "\n");
+                        }
+                    }
+                    break;
+
+                case 3: //list of late returned books
+                    for (Request request : requests) {
+                        if (request.getReturnApproved().equals(RequestType.APPROVED) && request.getBorrow().isLate()) {
+                            System.out.println(
+                                    "=== Late returned books ===\n\n" +
+                                            request +
+                                            "\n\tApproved by: " + request.getBorrowApprover() +
+                                            "\n\tBorrow Date: " + request.getBorrow().getBorrowDate() +
+                                            "\n\tReturn Date: " + request.getBorrow().getReturnDate() +
+                                            "\n\tDays between: " + ChronoUnit.DAYS.between(request.getBorrow().getBorrowDate() , request.getBorrow().getReturnDate()) +
+                                            "\n");
+                        }
+                    }
+                    break;
+
+                case 4: //taken books from operators
+                    String tempOperatorID;
+                    System.out.print("\nEnter Operator ID: ");
+                    tempOperatorID = scanner.next();
+
+                    for (Request request : requests) {
+                        if (request.getReturnApprover().getID().equals(tempOperatorID)) {
+                            System.out.println(
+                                    "=== Returned books by " + request.getReturnApprover().getName() + "===" +
+                                            request +
+                                            "\n\tBorrow Date: " + request.getBorrow().getBorrowDate() +
+                                            "\n\tReturn Date: " + request.getBorrow().getReturnDate() +
+                                            "\n"
+                            );
+                        }
+                    }
+                    break;
+
+                case 5: //most borrowed books in this year
+                    HashMap<Book ,Integer> borrowCounts = new HashMap<>();
+                    int length = 10;
+
+                    for (Request request : requests) {
+                        if (request.getBorrow().getBorrowDate().isAfter(LocalDate.now().minusYears(1))) {
+                                Book book = request.getBook();
+                                borrowCounts.put(book, borrowCounts.getOrDefault(book, 0) + 1);
+                        }
+                    }
+
+                    List<Map.Entry<Book, Integer>> sortedBooks = new ArrayList<>(borrowCounts.entrySet());
+                    sortedBooks.sort((a, b) -> b.getValue() - a.getValue());
+
+                    if (sortedBooks.size() < 10)
+                        length = sortedBooks.size();
+
+                    for (int i = 0; i < length; i++) {
+                        System.out.println(sortedBooks.get(i).getKey() + "\nNumber of borrow: " + sortedBooks.get(i).getValue());
+                    }
+
+
             }
 
         } while (choice != 99);
     }
 
-//    public Student loginStudentService() {
-//        Scanner scanner = new Scanner(System.in);
-//        Student student = null;
-//
-//        while (true) {
-//            menu.showLoginPage();
-//            System.out.print("\nEnter your choice (99 to exit): ");
-//
-//            int choice;
-//            try {
-//                choice = Integer.parseInt(scanner.nextLine());
-//            } catch (NumberFormatException e) {
-//                System.out.println("Please enter a valid number.");
-//                continue;
-//            }
-//
-//            switch (choice) {
-//                case 1:
-//                    student = login.signUp(students);
-//                    if (student != null) return student;
-//                    break;
-//
-//                case 2:
-//                    student = login.studentSignIn(students);
-//                    if (student != null) return student;
-//                    else System.out.println("Login failed. Try again.");
-//                    break;
-//
-//                case 99:
-//                    return null;
-//
-//                default:
-//                    System.out.println("Invalid choice. Please try again.");
-//            }
-//        }
-//    }
-
-    public Student loginStudentService() {
+    public int loginStudentService() {
         Scanner scanner = new Scanner(System.in);
-        int choice;
         Student student = null;
 
+        while (true) {
+            int choice;
+            int index;
 
-        do {
             menu.showLoginPage();
-            System.out.print("\nEnter your choice: ");
-            choice = scanner.nextInt();
+            System.out.print("\nEnter your choice (99 to exit): ");
+
+
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+                continue;
+            }
 
             switch (choice) {
                 case 1:
-                    student = login.signUp(students);
+                    index = login.signUp(students);
+                    if (index != -1)
+                        return index;
                     break;
 
                 case 2:
-                    student = login.studentSignIn(students);
+                    index = login.signIn(students);
+                    if (index != -1)
+                        return index;
+                    else System.out.println("Login failed. Try again.");
+                    break;
+
+                case 99:
+                    return -1;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
-        } while (choice != 99);
-        return student;
+        }
     }
-
-
-
-
 
 }
