@@ -1,4 +1,6 @@
-package ap.pojects.Library;
+package ap.pojects.Library.model;
+
+import ap.pojects.Library.service.Borrow;
 
 import java.io.Serializable;
 import java.time.LocalDate;

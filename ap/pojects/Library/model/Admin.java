@@ -1,6 +1,4 @@
-package ap.pojects.Library;
-
-import java.util.ArrayList;
+package ap.pojects.Library.model;
 
 public class Admin extends User{
 

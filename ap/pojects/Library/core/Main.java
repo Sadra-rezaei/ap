@@ -1,4 +1,9 @@
-package ap.pojects.Library;
+package ap.pojects.Library.core;
+
+import ap.pojects.Library.auth.Login;
+import ap.pojects.Library.model.Operator;
+import ap.pojects.Library.service.Backup;
+import ap.pojects.Library.service.Library;
 
 import java.util.Scanner;
 

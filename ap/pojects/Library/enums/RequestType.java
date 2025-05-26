@@ -1,4 +1,4 @@
-package ap.pojects.Library;
+package ap.pojects.Library.enums;
 
 public enum RequestType {
 

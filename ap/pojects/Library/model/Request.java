@@ -1,4 +1,7 @@
-package ap.pojects.Library;
+package ap.pojects.Library.model;
+
+import ap.pojects.Library.service.Borrow;
+import ap.pojects.Library.enums.RequestType;
 
 import java.io.Serializable;
 import java.time.LocalDate;

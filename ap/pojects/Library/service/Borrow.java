@@ -1,9 +1,12 @@
-package ap.pojects.Library;
+package ap.pojects.Library.service;
 
+import ap.pojects.Library.model.Book;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Borrow {
+public class Borrow implements Serializable {
     private LocalDate borrowDate;
     private LocalDate returnDate;
     private Book book;
@@ -38,6 +41,7 @@ public class Borrow {
     public void returnBook() {
         if (!this.isReturned) {
             isReturned = true;
+            this.book.setBorrowed(false);
             this.returnDate = LocalDate.now();
             this.book.changeBorrowed();
             if (ChronoUnit.DAYS.between(this.borrowDate, this.returnDate) > 60)

@@ -1,4 +1,4 @@
-package ap.pojects.Library;
+package ap.pojects.Library.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -46,6 +46,10 @@ public class Book implements Serializable {
 
     public boolean isBorrowed() {
         return borrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        this.borrowed = borrowed;
     }
 
     public void setTitle(String title) {

@@ -1,7 +1,6 @@
-package ap.pojects.Library;
+package ap.pojects.Library.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Operator extends User implements Serializable{
     private String operatorID;

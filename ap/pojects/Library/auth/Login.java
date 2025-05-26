@@ -1,4 +1,9 @@
-package ap.pojects.Library;
+package ap.pojects.Library.auth;
+
+import ap.pojects.Library.model.Book;
+import ap.pojects.Library.model.Operator;
+import ap.pojects.Library.model.Student;
+import ap.pojects.Library.model.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

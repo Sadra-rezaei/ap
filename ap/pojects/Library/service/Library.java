@@ -1,4 +1,9 @@
-package ap.pojects.Library;
+package ap.pojects.Library.service;
+
+import ap.pojects.Library.auth.Login;
+import ap.pojects.Library.util.Menu;
+import ap.pojects.Library.enums.RequestType;
+import ap.pojects.Library.model.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -278,7 +283,8 @@ public class Library {
 
                 case 2: //list of borrowed books
                     for (Request request : requests) {
-                        if ((request.getReturnApproved().equals(RequestType.UNDER_REVIEW)) && (request.getReturnApproved().equals(RequestType.REQUEST_NOT_MADE))) {
+//                        if ((request.getReturnApproved().equals(RequestType.UNDER_REVIEW)) && (request.getReturnApproved().equals(RequestType.REQUEST_NOT_MADE))) {
+                        if ((request.getBorrowApproved().equals(RequestType.APPROVED))) {
                             System.out.println(
                                     "=== Borrowed books ===\n\n" +
                                             request +
@@ -311,14 +317,16 @@ public class Library {
                     tempOperatorID = scanner.next();
 
                     for (Request request : requests) {
-                        if (request.getReturnApprover().getID().equals(tempOperatorID)) {
-                            System.out.println(
-                                    "=== Returned books by " + request.getReturnApprover().getName() + "===" +
-                                            request +
-                                            "\n\tBorrow Date: " + request.getBorrow().getBorrowDate() +
-                                            "\n\tReturn Date: " + request.getBorrow().getReturnDate() +
-                                            "\n"
-                            );
+                        if (!request.getReturnApproved().equals(RequestType.REQUEST_NOT_MADE)) {
+                            if (request.getReturnApprover().getID().equals(tempOperatorID)) {
+                                System.out.println(
+                                        "=== Returned books by " + request.getReturnApprover().getName() + "===" +
+                                                request +
+                                                "\n\tBorrow Date: " + request.getBorrow().getBorrowDate() +
+                                                "\n\tReturn Date: " + request.getBorrow().getReturnDate() +
+                                                "\n"
+                                );
+                            }
                         }
                     }
                     break;
