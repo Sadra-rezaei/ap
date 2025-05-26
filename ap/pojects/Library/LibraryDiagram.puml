@@ -1,0 +1,107 @@
+@startuml
+
+' Enum
+enum RequestType {
+    APPROVED,
+    REJECT,
+    UNDER_REVIEW,
+    REQUEST_NOT_MADE
+}
+
+' Abstract Base Class
+class User {
+  # firstname
+  # lastname
+  # getName()
+  # getID()
+}
+
+User <|-- Student
+User <|-- Admin
+User <|-- Operator
+
+class Student {
+  - course: String
+  - studentID: String
+  - dateOfJoining: LocalDate
+  - borrowedBooks: List<Borrow>
+}
+
+class Admin
+
+class Operator {
+  _ operatorID: String
+}
+
+class Book {
+  - title: String
+  - author: String
+  - isbn: String
+  - pages: int
+  - publishYear: LocalDate
+  - borrowed: boolean
+}
+
+class Borrow {
+  - book: Book
+  - borrowDate: LocalDate
+  - returnDate: LocalDate
+  + isLate()
+  + returnBook()
+}
+
+class Request {
+  - student: Student
+  - borrow: Borrow
+  - borrowApprover: Operator
+  - returnApprover: Operator
+  - book: Book
+  - borrowApproved: RequestType
+  - returnApproved: RequestType
+  + approveBorrow()
+  + approveReturn()
+}
+
+class Library {
+  - books: List<Book>
+  - students: List<Student>
+  - operators: List<Operator>
+  - menu: Menu
+  - admin: Admin
+  - requests: List<Request>
+  + getMenu()
+  + studentService()
+  + operatorService()
+  + adminService()
+}
+
+class Backup {
+  + loadObject()
+  + saveObject()
+}
+
+class Login {
+  + userStringInput()
+  + signUp()
+  + signIn()
+  + creatOperator()
+  + createBook()
+}
+
+class Main {
+  + main(args: String[]): void
+}
+
+' Relationships
+Student --> Book : borrows >
+Student --> Request : submits >
+Request --> Book
+Operator --> Request : approve >
+Library --> Book
+Library --> User
+Library --> Request
+Library --> Borrow
+Backup --> Library
+Login --> User
+
+@enduml
