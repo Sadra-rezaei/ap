@@ -2,6 +2,7 @@ package ap.projects.scraper.abalyzer;
 
 import ap.projects.scraper.Conf;
 import ap.projects.scraper.parser.HtmlParser;
+import ap.projects.scraper.store.ImageUrlManager;
 import ap.projects.scraper.utils.DirectoryTools;
 import ap.projects.scraper.utils.FileTools;
 import ap.projects.scraper.utils.ObjectCounter;
@@ -22,6 +23,7 @@ public class HtmlAnalyzer {
                 .map(s -> HtmlParser.getFirstUrl(s))
                 .filter(s -> s != null)
                 .filter(s -> s.length() > 1)
+                .distinct()
                 .collect(Collectors.toList());
         return urls;
     }
@@ -49,12 +51,19 @@ public class HtmlAnalyzer {
         }
     }
 
+    public static void printAllUrls(){
+        for (String Url : getAllUrls()) {
+            System.out.println(Url);
+        }
+    }
+
     public static void main(String[] args) {
 
-        HtmlAnalyzer.printTopCountUrls(10);
+        HtmlAnalyzer.printAllUrls();
+        ImageUrlManager.save(getAllUrls(),Conf.IMAGE_TXT);
 
-        System.out.println("____________________");
-        HtmlAnalyzer.getTopUrls(10).forEach(s -> System.out.println(s));
+//        System.out.println("____________________");
+//        HtmlAnalyzer.getTopUrls(10).forEach(s -> System.out.println(s));
 
     }
 }
