@@ -1,4 +1,4 @@
-package ap.pojects.Library.model;
+package ap.projects.Library.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;

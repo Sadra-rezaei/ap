@@ -1,4 +1,4 @@
-package ap.pojects.Library.model;
+package ap.projects.Library.model;
 
 public class Admin extends User{
 

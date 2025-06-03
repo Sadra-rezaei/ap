@@ -1,6 +1,6 @@
-package ap.pojects.Library.service;
+package ap.projects.Library.service;
 
-import ap.pojects.Library.model.Book;
+import ap.projects.Library.model.Book;
 
 import java.io.Serializable;
 import java.time.LocalDate;
