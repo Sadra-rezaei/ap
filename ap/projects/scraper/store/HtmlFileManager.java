@@ -34,6 +34,10 @@ public class HtmlFileManager {
 
     public String getSaveHtmlFileAddress(){
         saveCounter++;
-        return saveFileBasePath +"/"+ saveCounter;
+//        if (saveCounter == 1)
+//            return saveFileBasePath +"/"+ saveCounter;
+//        DirectoryTools.createDirectory(saveFileBasePath + "/" + saveCounter);
+        return saveFileBasePath +"/"+ saveCounter;//+ "/" + saveCounter;
+
     }
 }

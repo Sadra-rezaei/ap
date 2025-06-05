@@ -6,6 +6,8 @@ public class Conf {
 
     public static final String SAVE_DIRECTORY = "fetched_html";
 
-    public static final String IMAGE_TXT = "fetched_image.txt";
+    public static final String SAVE_DIRECTORY_2 = "temp";
+
+    public static final String URLS_TXT = "urls.txt";
 
 }

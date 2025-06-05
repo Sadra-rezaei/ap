@@ -10,22 +10,36 @@ import java.util.stream.Stream;
 
 public class HtmlParser {
 
+//    public static String getFirstUrl(String htmlLine) {
+//        String url = null;
+//        int startIndex = htmlLine.indexOf("=");
+//        int endIndex = -1;
+//        if (startIndex >= 0) {
+//            try {
+//
+//                if (htmlLine.indexOf(".png") >= 0)
+//                    endIndex = htmlLine.indexOf(".png\"", startIndex);
+//                else if (htmlLine.indexOf(".jpg") >= 0)
+//                    endIndex = htmlLine.indexOf(".jpg\"", startIndex);
+//                else if (htmlLine.indexOf(".gif") >= 0)
+//                    endIndex = htmlLine.indexOf(".gif\"", startIndex);
+//
+//                url = htmlLine.substring(startIndex + 2, endIndex + 4);
+//
+//            } catch (Exception e) {
+//            }
+//        }
+//        return url;
+//    }
+
     public static String getFirstUrl(String htmlLine) {
         String url = null;
-        int startIndex = htmlLine.indexOf("=");
-        int endIndex = -1;
-        if (startIndex >= 0) {
+        int startIndex = htmlLine.indexOf("href=\"");
+        if (startIndex >= 0 && !htmlLine.contains("#")) {
             try {
-
-                if (htmlLine.indexOf(".png") >= 0)
-                    endIndex = htmlLine.indexOf(".png\"", startIndex);
-                else if (htmlLine.indexOf(".jpg") >= 0)
-                    endIndex = htmlLine.indexOf(".jpg\"", startIndex);
-                else if (htmlLine.indexOf(".gif") >= 0)
-                    endIndex = htmlLine.indexOf(".gif\"", startIndex);
-
-                url = htmlLine.substring(startIndex + 2, endIndex + 4);
-
+                int hrefLength = "href\"".length();
+                int endIndex = htmlLine.indexOf("\"", startIndex + hrefLength + 1);
+                url = htmlLine.substring(startIndex + hrefLength + 1, endIndex);
             } catch (Exception e) {
             }
         }

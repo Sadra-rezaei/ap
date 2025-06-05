@@ -1,12 +1,14 @@
 package ap.projects.scraper.abalyzer;
 
 import ap.projects.scraper.Conf;
+import ap.projects.scraper.DomainHtmlScraper;
 import ap.projects.scraper.parser.HtmlParser;
-import ap.projects.scraper.store.ImageUrlManager;
+import ap.projects.scraper.store.PackageManager;
 import ap.projects.scraper.utils.DirectoryTools;
 import ap.projects.scraper.utils.FileTools;
 import ap.projects.scraper.utils.ObjectCounter;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -59,8 +61,20 @@ public class HtmlAnalyzer {
 
     public static void main(String[] args) {
 
-        HtmlAnalyzer.printAllUrls();
-        ImageUrlManager.save(getAllUrls(),Conf.IMAGE_TXT);
+//        HtmlAnalyzer.printAllUrls();
+        FileTools.save(getAllUrls(),Conf.URLS_TXT);
+
+        for (String url : getAllUrls()) {
+            String savePath = PackageManager.packagePathName(url);
+            if (url.indexOf("/") == 0)
+                url = Conf.DOMAIN_ADDRESS + url;
+            DomainHtmlScraper dm = new DomainHtmlScraper(url,savePath);
+            try {
+                dm.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
 //        System.out.println("____________________");
 //        HtmlAnalyzer.getTopUrls(10).forEach(s -> System.out.println(s));
