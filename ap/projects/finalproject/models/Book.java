@@ -3,7 +3,6 @@ package ap.projects.finalproject.models;
 import java.io.Serializable;
 
 public class Book implements Serializable {
-    private static final long serialVersionUID = 1L;
     public String id;
     public String title;
     public String author;

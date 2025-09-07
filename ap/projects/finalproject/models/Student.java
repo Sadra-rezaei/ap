@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student implements Serializable {
-    private static final long serialVersionUID = 1L;
     public String username;
     public String password;
     public boolean active = true;

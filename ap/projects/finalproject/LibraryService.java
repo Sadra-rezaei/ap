@@ -1,6 +1,7 @@
 package ap.projects.finalproject;
 
 import ap.projects.finalproject.models.Book;
+import ap.projects.finalproject.models.Employee;
 import ap.projects.finalproject.models.Loan;
 import ap.projects.finalproject.models.Student;
 import java.time.LocalDate;
@@ -105,5 +106,60 @@ public class LibraryService {
         long currentlyLoaned = ds.books.values().stream().filter(b->!b.available).count();
         return String.format("students=%d books=%d loans=%d currentlyLoaned=%d", students, books, loans, currentlyLoaned);
     }
+
+    public boolean addEmployee(String username, String password){
+        if(ds.employees.containsKey(username)) return false;
+        ds.employees.put(username, new Employee(username, password));
+        ds.save();
+        return true;
+    }
+
+//    public String employeeReport(String empUsername){
+//        long addedBooks = ds.books.values().stream()
+//                .filter(b -> b.id.startsWith(empUsername+"_")).count();
+//        long loansApproved = ds.loans.values().stream()
+//                .filter(l -> l.approved).count();
+//        long loansReturned = ds.loans.values().stream()
+//                .filter(l -> l.returnedDate != null).count();
+//        return String.format("Employee %s: added=%d approved=%d returned=%d",
+//                empUsername, addedBooks, loansApproved, loansReturned);
+//    }
+//
+//    public String loanStats(){
+//        int totalRequests = ds.loans.size();
+//        long approved = ds.loans.values().stream().filter(l->l.approved).count();
+//        double avgDays = ds.loans.values().stream()
+//                .filter(l->l.returnedDate!=null)
+//                .mapToLong(l->java.time.temporal.ChronoUnit.DAYS.between(l.receivedDate, l.returnedDate))
+//                .average().orElse(0.0);
+//        return String.format("Total requests=%d, Approved=%d, AvgDays=%.2f", totalRequests, approved, avgDays);
+//    }
+//
+//    public String studentStats(){
+//        StringBuilder sb = new StringBuilder();
+//        for(Student s : ds.students.values()){
+//            int total = s.loanIds.size();
+//            int notReturned=0, delayed=0;
+//            for(String lid : s.loanIds){
+//                Loan l = ds.loans.get(lid);
+//                if(l.returnedDate==null) notReturned++;
+//                else if(l.returnedDate.isAfter(l.endDate)) delayed++;
+//            }
+//            sb.append(String.format("%s: total=%d notReturned=%d delayed=%d\n", s.username, total, notReturned, delayed));
+//        }
+//
+//        List<Student> sorted = new java.util.ArrayList<>(ds.students.values());
+//        sorted.sort((a,b)->{
+//            int da = (int) a.loanIds.stream().map(lid->ds.loans.get(lid))
+//                    .filter(l->l!=null && l.returnedDate!=null && l.returnedDate.isAfter(l.endDate)).count();
+//            int db = (int) b.loanIds.stream().map(lid->ds.loans.get(lid))
+//                    .filter(l->l!=null && l.returnedDate!=null && l.returnedDate.isAfter(l.endDate)).count();
+//            return Integer.compare(db, da);
+//        });
+//        sb.append("Top 10 delayed:\n");
+//        sorted.stream().limit(10).forEach(s->sb.append(s.username).append("\n"));
+//        return sb.toString();
+//    }
+
 }
 
