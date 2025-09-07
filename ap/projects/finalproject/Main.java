@@ -123,6 +123,10 @@ public class Main {
                     System.out.print("password: ");  String s=sc.nextLine();
                     lib.addEmployee(u,s);
                     System.out.println("added");
+                } else if (cmd.equals("2")){
+                    System.out.print("loanId: "); String id = sc.nextLine();
+                    System.out.println(lib.employeeReport(id));
+
                 }
 
 

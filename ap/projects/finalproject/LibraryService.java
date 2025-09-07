@@ -114,17 +114,17 @@ public class LibraryService {
         return true;
     }
 
-//    public String employeeReport(String empUsername){
-//        long addedBooks = ds.books.values().stream()
-//                .filter(b -> b.id.startsWith(empUsername+"_")).count();
-//        long loansApproved = ds.loans.values().stream()
-//                .filter(l -> l.approved).count();
-//        long loansReturned = ds.loans.values().stream()
-//                .filter(l -> l.returnedDate != null).count();
-//        return String.format("Employee %s: added=%d approved=%d returned=%d",
-//                empUsername, addedBooks, loansApproved, loansReturned);
-//    }
-//
+    public String employeeReport(String empUsername){
+        long addedBooks = ds.books.values().stream()
+                .filter(b -> b.id.startsWith(empUsername+"_")).count();
+        long loansApproved = ds.loans.values().stream()
+                .filter(l -> l.approved).count();
+        long loansReturned = ds.loans.values().stream()
+                .filter(l -> l.returnedDate != null).count();
+        return String.format("Employee %s: added=%d approved=%d returned=%d",
+                empUsername, addedBooks, loansApproved, loansReturned);
+    }
+
 //    public String loanStats(){
 //        int totalRequests = ds.loans.size();
 //        long approved = ds.loans.values().stream().filter(l->l.approved).count();
