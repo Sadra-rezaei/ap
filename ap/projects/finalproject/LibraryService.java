@@ -32,12 +32,12 @@ public class LibraryService {
         }).collect(Collectors.toList());
     }
 
-//    public List<Book> guestSearchByTitle(String title){
-//        return ds.books.values().stream()
-//                .filter(b -> b.title.toLowerCase().contains(title.toLowerCase()))
-//                .collect(Collectors.toList());
-//    }
-//
+    public List<Book> guestSearchByTitle(String title){
+        return ds.books.values().stream()
+                .filter(b -> b.title.toLowerCase().contains(title.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
     public String createLoan(String bookId, String studentUsername, LocalDate start, LocalDate end){
         Book b = ds.books.get(bookId);
         Student s = ds.students.get(studentUsername);
