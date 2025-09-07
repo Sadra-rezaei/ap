@@ -38,17 +38,17 @@ public class LibraryService {
 //                .collect(Collectors.toList());
 //    }
 //
-//    public String createLoan(String bookId, String studentUsername, LocalDate start, LocalDate end){
-//        Book b = ds.books.get(bookId);
-//        Student s = ds.students.get(studentUsername);
-//        if(b==null || s==null) return null;
-//        String loanId = "L"+(ds.loans.size()+1);
-//        Loan loan = new Loan(loanId, bookId, studentUsername, start, end);
-//        ds.loans.put(loanId, loan);
-//        s.loanIds.add(loanId);
-//        ds.save();
-//        return loanId;
-//    }
+    public String createLoan(String bookId, String studentUsername, LocalDate start, LocalDate end){
+        Book b = ds.books.get(bookId);
+        Student s = ds.students.get(studentUsername);
+        if(b==null || s==null) return null;
+        String loanId = "L"+(ds.loans.size()+1);
+        Loan loan = new Loan(loanId, bookId, studentUsername, start, end);
+        ds.loans.put(loanId, loan);
+        s.loanIds.add(loanId);
+        ds.save();
+        return loanId;
+    }
 //
 //    public boolean approveLoan(String loanId, String employeeUsername){
 //        Loan loan = ds.loans.get(loanId);
