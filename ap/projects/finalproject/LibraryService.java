@@ -80,24 +80,24 @@ public class LibraryService {
         return true;
     }
 
-//    public String studentLoanReport(String studentUsername){
-//        Student s = ds.students.get(studentUsername);
-//        if(s==null) return "Student not found";
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("History for ").append(studentUsername).append("\n");
-//        int total = s.loanIds.size();
-//        int notReturned = 0;
-//        int delayed = 0;
-//        for(String id : s.loanIds){
-//            Loan loan = ds.loans.get(id);
-//            sb.append(loan).append("\n");
-//            if(loan.returnedDate==null) notReturned++;
-//            if(loan.returnedDate!=null && loan.returnedDate.isAfter(loan.endDate)) delayed++;
-//        }
-//        sb.append(String.format("Total=%d notReturned=%d delayed=%d\n", total, notReturned, delayed));
-//        return sb.toString();
-//    }
-//
+    public String studentLoanReport(String studentUsername){
+        Student s = ds.students.get(studentUsername);
+        if(s==null) return "Student not found";
+        StringBuilder sb = new StringBuilder();
+        sb.append("History for ").append(studentUsername).append("\n");
+        int total = s.loanIds.size();
+        int notReturned = 0;
+        int delayed = 0;
+        for(String id : s.loanIds){
+            Loan loan = ds.loans.get(id);
+            sb.append(loan).append("\n");
+            if(loan.returnedDate==null) notReturned++;
+            if(loan.returnedDate!=null && loan.returnedDate.isAfter(loan.endDate)) delayed++;
+        }
+        sb.append(String.format("Total=%d notReturned=%d delayed=%d\n", total, notReturned, delayed));
+        return sb.toString();
+    }
+
     public String guestStats(){
         long students = ds.students.size();
         long books = ds.books.size();
