@@ -11,10 +11,10 @@ public class LibraryService {
     private DataStore ds;
     public LibraryService(DataStore ds){ this.ds = ds; }
 
-//    public void addBook(String id, String title, String author, int year){
-//        ds.books.put(id, new Book(id,title,author,year));
-//        ds.save();
-//    }
+    public void addBook(String id, String title, String author, int year){
+        ds.books.put(id, new Book(id,title,author,year));
+        ds.save();
+    }
 
     public List<Book> searchBooks(String titleQuery, String authorQuery, Integer year){
         return ds.books.values().stream().filter(b -> {
