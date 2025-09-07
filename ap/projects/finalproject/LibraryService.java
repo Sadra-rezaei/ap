@@ -49,37 +49,37 @@ public class LibraryService {
         ds.save();
         return loanId;
     }
-//
-//    public boolean approveLoan(String loanId, String employeeUsername){
-//        Loan loan = ds.loans.get(loanId);
-//        if(loan==null) return false;
-//        LocalDate today = LocalDate.now();
-//        if(!loan.startDate.equals(today) && !loan.startDate.equals(today.minusDays(1))) return false;
-//        loan.approved = true;
-//        Book b = ds.books.get(loan.bookId);
-//        if(b!=null) b.available = false;
-//        ds.save();
-//        return true;
-//    }
-//
-//    public boolean receiveBook(String loanId){
-//        Loan loan = ds.loans.get(loanId);
-//        if(loan==null) return false;
-//        loan.receivedDate = LocalDate.now();
-//        ds.save();
-//        return true;
-//    }
-//
-//    public boolean returnBook(String loanId){
-//        Loan loan = ds.loans.get(loanId);
-//        if(loan==null) return false;
-//        loan.returnedDate = LocalDate.now();
-//        Book b = ds.books.get(loan.bookId);
-//        if(b!=null) b.available = true;
-//        ds.save();
-//        return true;
-//    }
-//
+
+    public boolean approveLoan(String loanId, String employeeUsername){
+        Loan loan = ds.loans.get(loanId);
+        if(loan==null) return false;
+        LocalDate today = LocalDate.now();
+        if(!loan.startDate.equals(today) && !loan.startDate.equals(today.minusDays(1))) return false;
+        loan.approved = true;
+        Book b = ds.books.get(loan.bookId);
+        if(b!=null) b.available = false;
+        ds.save();
+        return true;
+    }
+
+    public boolean receiveBook(String loanId){
+        Loan loan = ds.loans.get(loanId);
+        if(loan==null) return false;
+        loan.receivedDate = LocalDate.now();
+        ds.save();
+        return true;
+    }
+
+    public boolean returnBook(String loanId){
+        Loan loan = ds.loans.get(loanId);
+        if(loan==null) return false;
+        loan.returnedDate = LocalDate.now();
+        Book b = ds.books.get(loan.bookId);
+        if(b!=null) b.available = true;
+        ds.save();
+        return true;
+    }
+
 //    public String studentLoanReport(String studentUsername){
 //        Student s = ds.students.get(studentUsername);
 //        if(s==null) return "Student not found";
