@@ -135,31 +135,31 @@ public class LibraryService {
         return String.format("Total requests=%d, Approved=%d, AvgDays=%.2f", totalRequests, approved, avgDays);
     }
 
-//    public String studentStats(){
-//        StringBuilder sb = new StringBuilder();
-//        for(Student s : ds.students.values()){
-//            int total = s.loanIds.size();
-//            int notReturned=0, delayed=0;
-//            for(String lid : s.loanIds){
-//                Loan l = ds.loans.get(lid);
-//                if(l.returnedDate==null) notReturned++;
-//                else if(l.returnedDate.isAfter(l.endDate)) delayed++;
-//            }
-//            sb.append(String.format("%s: total=%d notReturned=%d delayed=%d\n", s.username, total, notReturned, delayed));
-//        }
-//
-//        List<Student> sorted = new java.util.ArrayList<>(ds.students.values());
-//        sorted.sort((a,b)->{
-//            int da = (int) a.loanIds.stream().map(lid->ds.loans.get(lid))
-//                    .filter(l->l!=null && l.returnedDate!=null && l.returnedDate.isAfter(l.endDate)).count();
-//            int db = (int) b.loanIds.stream().map(lid->ds.loans.get(lid))
-//                    .filter(l->l!=null && l.returnedDate!=null && l.returnedDate.isAfter(l.endDate)).count();
-//            return Integer.compare(db, da);
-//        });
-//        sb.append("Top 10 delayed:\n");
-//        sorted.stream().limit(10).forEach(s->sb.append(s.username).append("\n"));
-//        return sb.toString();
-//    }
+    public String studentStats(){
+        StringBuilder sb = new StringBuilder();
+        for(Student s : ds.students.values()){
+            int total = s.loanIds.size();
+            int notReturned=0, delayed=0;
+            for(String lid : s.loanIds){
+                Loan l = ds.loans.get(lid);
+                if(l.returnedDate==null) notReturned++;
+                else if(l.returnedDate.isAfter(l.endDate)) delayed++;
+            }
+            sb.append(String.format("%s: total=%d notReturned=%d delayed=%d\n", s.username, total, notReturned, delayed));
+        }
+
+        List<Student> sorted = new java.util.ArrayList<>(ds.students.values());
+        sorted.sort((a,b)->{
+            int da = (int) a.loanIds.stream().map(lid->ds.loans.get(lid))
+                    .filter(l->l!=null && l.returnedDate!=null && l.returnedDate.isAfter(l.endDate)).count();
+            int db = (int) b.loanIds.stream().map(lid->ds.loans.get(lid))
+                    .filter(l->l!=null && l.returnedDate!=null && l.returnedDate.isAfter(l.endDate)).count();
+            return Integer.compare(db, da);
+        });
+        sb.append("Top 10 delayed:\n");
+        sorted.stream().limit(10).forEach(s->sb.append(s.username).append("\n"));
+        return sb.toString();
+    }
 
 }
 

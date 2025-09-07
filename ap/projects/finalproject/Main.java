@@ -67,67 +67,91 @@ public class Main {
                 }
 
 
-            } else if(c.equals("3")){
+            } else if(c.equals("3")){ //employee
                 System.out.print("user: "); String u=sc.nextLine();
                 System.out.print("pass: "); String p=sc.nextLine();
                 Employee e = auth.loginEmployee(u,p);
                 if(e==null){ System.out.println("bad"); continue; }
                 System.out.println("emp:"+u);
-                System.out.println("""
-                        1-add book
-                        2-approve loan 
-                        3-receive 
-                        4-return 
-                        5-student report""");
-                String cmd = sc.nextLine();
+                while(true) {
+                    System.out.println("""
+                            1-add book
+                            2-approve loan 
+                            3-receive 
+                            4-return 
+                            5-student report
+                            6- === BACK ===
+                            """);
+                    String cmd = sc.nextLine();
 
-                if(cmd.equals("1")){
-                    System.out.print("id: "); String id=sc.nextLine();
-                    System.out.print("title: "); String t=sc.nextLine();
-                    System.out.print("author: "); String a=sc.nextLine();
-                    System.out.print("year: "); int y=Integer.parseInt(sc.nextLine());
-                    lib.addBook(id,t,a,y);
-                    System.out.println("added");
-                } else if(cmd.equals("2")){
-                    System.out.print("loanId: "); String lid = sc.nextLine();
-                    boolean ok = lib.approveLoan(lid, u);
-                    System.out.println("approved? "+ok);
-                } else if(cmd.equals("3")){
-                    System.out.print("loanId: "); String lid = sc.nextLine();
-                    System.out.println(lib.receiveBook(lid));
-                } else if(cmd.equals("4")){
-                    System.out.print("loanId: "); String lid = sc.nextLine();
-                    System.out.println(lib.returnBook(lid));
-                } else if(cmd.equals("5")){
-                    System.out.print("student username: "); String sname=sc.nextLine();
-                    System.out.println(lib.studentLoanReport(sname));
+                    if (cmd.equals("1")) {
+                        System.out.print("id: ");
+                        String id = sc.nextLine();
+                        System.out.print("title: ");
+                        String t = sc.nextLine();
+                        System.out.print("author: ");
+                        String a = sc.nextLine();
+                        System.out.print("year: ");
+                        int y = Integer.parseInt(sc.nextLine());
+                        lib.addBook(id, t, a, y);
+                        System.out.println("added");
+                    } else if (cmd.equals("2")) {
+                        System.out.print("loanId: ");
+                        String lid = sc.nextLine();
+                        boolean ok = lib.approveLoan(lid, u);
+                        System.out.println("approved? " + ok);
+                    } else if (cmd.equals("3")) {
+                        System.out.print("loanId: ");
+                        String lid = sc.nextLine();
+                        System.out.println(lib.receiveBook(lid));
+                    } else if (cmd.equals("4")) {
+                        System.out.print("loanId: ");
+                        String lid = sc.nextLine();
+                        System.out.println(lib.returnBook(lid));
+                    } else if (cmd.equals("5")) {
+                        System.out.print("student username: ");
+                        String sname = sc.nextLine();
+                        System.out.println(lib.studentLoanReport(sname));
+                    } else if (cmd.equals("6")) {
+                        break;
+                    }
                 }
 
 
-            } else if (c.equals("4")){
+            } else if (c.equals("4")){ //admin
                 System.out.print("Hi Sadra\npassword: "); String p=sc.nextLine();
                 if(!p.equals(admin.getPassword())){
                     System.out.println("wrong password");
                     break;
                 }
-                System.out.println("""
-                        1.add Employee
-                        2.report Employee
-                        3.loan Stats
-                        4.student Stats
-                        """);
-                String cmd = sc.nextLine();
+                while (true) {
+                    System.out.println("""
+                            1.add Employee
+                            2.report Employee
+                            3.loan Stats
+                            4.10 student with most delays Stats
+                            5. === BACK ===
+                            """);
+                    String cmd = sc.nextLine();
 
-                if(cmd.equals("1")){
-                    System.out.print("user: "); String u=sc.nextLine();
-                    System.out.print("password: ");  String s=sc.nextLine();
-                    lib.addEmployee(u,s);
-                    System.out.println("added");
-                } else if (cmd.equals("2")){
-                    System.out.print("loanId: "); String id = sc.nextLine();
-                    System.out.println(lib.employeeReport(id));
-                } else if(cmd.equals("3")){
-                    System.out.println(lib.loanStats());
+                    if (cmd.equals("1")) {
+                        System.out.print("user: ");
+                        String u = sc.nextLine();
+                        System.out.print("password: ");
+                        String s = sc.nextLine();
+                        lib.addEmployee(u, s);
+                        System.out.println("added");
+                    } else if (cmd.equals("2")) {
+                        System.out.print("loanId: ");
+                        String id = sc.nextLine();
+                        System.out.println(lib.employeeReport(id));
+                    } else if (cmd.equals("3")) {
+                        System.out.println(lib.loanStats());
+                    } else if (cmd.equals("4")) {
+                        System.out.println(lib.studentStats());
+                    } else if (cmd.equals("5")) {
+                        break;
+                    }
                 }
 
 
