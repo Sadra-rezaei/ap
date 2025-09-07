@@ -98,12 +98,12 @@ public class LibraryService {
 //        return sb.toString();
 //    }
 //
-//    public String guestStats(){
-//        long students = ds.students.size();
-//        long books = ds.books.size();
-//        long loans = ds.loans.size();
-//        long currentlyLoaned = ds.books.values().stream().filter(b->!b.available).count();
-//        return String.format("students=%d books=%d loans=%d currentlyLoaned=%d", students, books, loans, currentlyLoaned);
-//    }
+    public String guestStats(){
+        long students = ds.students.size();
+        long books = ds.books.size();
+        long loans = ds.loans.size();
+        long currentlyLoaned = ds.books.values().stream().filter(b->!b.available).count();
+        return String.format("students=%d books=%d loans=%d currentlyLoaned=%d", students, books, loans, currentlyLoaned);
+    }
 }
 
