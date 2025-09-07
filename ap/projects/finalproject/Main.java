@@ -126,7 +126,8 @@ public class Main {
                 } else if (cmd.equals("2")){
                     System.out.print("loanId: "); String id = sc.nextLine();
                     System.out.println(lib.employeeReport(id));
-
+                } else if(cmd.equals("3")){
+                    System.out.println(lib.loanStats());
                 }
 
 

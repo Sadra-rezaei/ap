@@ -125,16 +125,16 @@ public class LibraryService {
                 empUsername, addedBooks, loansApproved, loansReturned);
     }
 
-//    public String loanStats(){
-//        int totalRequests = ds.loans.size();
-//        long approved = ds.loans.values().stream().filter(l->l.approved).count();
-//        double avgDays = ds.loans.values().stream()
-//                .filter(l->l.returnedDate!=null)
-//                .mapToLong(l->java.time.temporal.ChronoUnit.DAYS.between(l.receivedDate, l.returnedDate))
-//                .average().orElse(0.0);
-//        return String.format("Total requests=%d, Approved=%d, AvgDays=%.2f", totalRequests, approved, avgDays);
-//    }
-//
+    public String loanStats(){
+        int totalRequests = ds.loans.size();
+        long approved = ds.loans.values().stream().filter(l->l.approved).count();
+        double avgDays = ds.loans.values().stream()
+                .filter(l->l.returnedDate!=null)
+                .mapToLong(l->java.time.temporal.ChronoUnit.DAYS.between(l.receivedDate, l.returnedDate))
+                .average().orElse(0.0);
+        return String.format("Total requests=%d, Approved=%d, AvgDays=%.2f", totalRequests, approved, avgDays);
+    }
+
 //    public String studentStats(){
 //        StringBuilder sb = new StringBuilder();
 //        for(Student s : ds.students.values()){
