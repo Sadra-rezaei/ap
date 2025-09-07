@@ -50,7 +50,6 @@ public class LibraryService {
 //        return loanId;
 //    }
 //
-//    // کارمند: تایید درخواست (اگر start == today یا yesterday)
 //    public boolean approveLoan(String loanId, String employeeUsername){
 //        Loan loan = ds.loans.get(loanId);
 //        if(loan==null) return false;
@@ -63,7 +62,6 @@ public class LibraryService {
 //        return true;
 //    }
 //
-//    // کارمند: دریافت کتاب (ثبت زمان دریافت)
 //    public boolean receiveBook(String loanId){
 //        Loan loan = ds.loans.get(loanId);
 //        if(loan==null) return false;
@@ -72,7 +70,6 @@ public class LibraryService {
 //        return true;
 //    }
 //
-//    // کارمند: ثبت بازگرداندن کتاب
 //    public boolean returnBook(String loanId){
 //        Loan loan = ds.loans.get(loanId);
 //        if(loan==null) return false;
@@ -83,7 +80,6 @@ public class LibraryService {
 //        return true;
 //    }
 //
-//    // گزارش ساده: تاریخچه امانت یک دانشجو به همراه آمارها
 //    public String studentLoanReport(String studentUsername){
 //        Student s = ds.students.get(studentUsername);
 //        if(s==null) return "Student not found";
@@ -102,7 +98,6 @@ public class LibraryService {
 //        return sb.toString();
 //    }
 //
-//    // آمار کلی برای مهمان
 //    public String guestStats(){
 //        long students = ds.students.size();
 //        long books = ds.books.size();
