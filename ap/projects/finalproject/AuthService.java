@@ -1,8 +1,6 @@
 package ap.projects.finalproject;
 
-import ap.projects.finalproject.models.Book;
 import ap.projects.finalproject.models.Employee;
-import ap.projects.finalproject.models.Loan;
 import ap.projects.finalproject.models.Student;
 
 public class AuthService {
@@ -22,10 +20,10 @@ public class AuthService {
         return null;
     }
 
-//    public Employee loginEmployee(String user, String pass){
-//        Employee e = ds.employees.get(user);
-//        if(e!=null && e.password.equals(pass)) return e;
-//        return null;
-//    }
+    public Employee loginEmployee(String user, String pass){
+        Employee e = ds.employees.get(user);
+        if(e!=null && e.password.equals(pass)) return e;
+        return null;
+    }
 }
 
