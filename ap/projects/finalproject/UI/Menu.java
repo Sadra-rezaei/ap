@@ -22,8 +22,18 @@ public class Menu {
 
     public void showStudentMenu(){
         System.out.print("""
-                            1-search book\s
-                            2-show books\s
+                            1-show books\s
+                            2-search book\s
+                            3-return book\s
+                            99- ===Back===
+                            >
+        """);
+    }
+
+    public void showGuestMenu(){
+        System.out.print("""
+                            1-show books\s
+                            2-search book\s
                             99- ===Back===
                             >
         """);
@@ -44,9 +54,8 @@ public class Menu {
                                 1-add book
                                 2-approve loan\s
                                 3-receive\s
-                                4-return\s
-                                5-student report
-                                6- === BACK ===
+                                4-student report
+                                5- === BACK ===
                                \s""");
     }
 

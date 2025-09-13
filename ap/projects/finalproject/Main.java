@@ -37,7 +37,7 @@ public class Main {
                 case "1":
                     System.out.println(lib.guestStats());
 
-                    menu.showStudentMenu();
+                    menu.showGuestMenu();
                     cmd = sc.nextLine();
 
                     switch (cmd) {
@@ -93,6 +93,12 @@ public class Main {
                                     for (Book book: ds.getBooks().values()){
                                         System.out.println(book+"\n");
                                     }
+                                }
+
+                                case "3" -> {
+                                    System.out.print("loanId: ");
+                                    String lid = sc.nextLine();
+                                    System.out.println(lib.returnBook(lid));
                                 }
                                 case "99" -> {}
 
@@ -161,18 +167,12 @@ public class Main {
                                 System.out.println(lib.receiveBook(lid));
                                 break;
                             }
-                            case "4": {
-                                System.out.print("loanId: ");
-                                String lid = sc.nextLine();
-                                System.out.println(lib.returnBook(lid));
-                                break;
-                            }
-                            case "5":
+                            case "4":
                                 System.out.print("student username: ");
                                 String sname = sc.nextLine();
                                 System.out.println(lib.studentLoanReport(sname));
                                 break;
-                            case "6":
+                            case "5":
                                 break label1;
                         }
                     }
