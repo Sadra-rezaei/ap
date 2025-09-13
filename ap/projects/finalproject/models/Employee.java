@@ -2,12 +2,11 @@ package ap.projects.finalproject.models;
 
 import java.io.Serializable;
 
-public class Employee implements Serializable {
-    public String username;
-    public String password;
+public class Employee extends User implements Serializable {
+
 
     public Employee(String username, String password){
-        this.username = username; this.password = password;
+        super.username = username; super.password = password;
     }
 
     @Override

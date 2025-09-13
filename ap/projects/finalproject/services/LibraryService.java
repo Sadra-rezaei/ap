@@ -1,5 +1,6 @@
-package ap.projects.finalproject;
+package ap.projects.finalproject.services;
 
+import ap.projects.finalproject.dataBase.DataStore;
 import ap.projects.finalproject.models.Book;
 import ap.projects.finalproject.models.Employee;
 import ap.projects.finalproject.models.Loan;
@@ -145,7 +146,7 @@ public class LibraryService {
                 if(l.returnedDate==null) notReturned++;
                 else if(l.returnedDate.isAfter(l.endDate)) delayed++;
             }
-            sb.append(String.format("%s: total=%d notReturned=%d delayed=%d\n", s.username, total, notReturned, delayed));
+            sb.append(String.format("%s: total=%d notReturned=%d delayed=%d\n", s.getUsername(), total, notReturned, delayed));
         }
 
         List<Student> sorted = new java.util.ArrayList<>(ds.students.values());
@@ -157,9 +158,11 @@ public class LibraryService {
             return Integer.compare(db, da);
         });
         sb.append("Top 10 delayed:\n");
-        sorted.stream().limit(10).forEach(s->sb.append(s.username).append("\n"));
+        sorted.stream().limit(10).forEach(s->sb.append(s.getUsername()).append("\n"));
         return sb.toString();
     }
+
+
 
 }
 

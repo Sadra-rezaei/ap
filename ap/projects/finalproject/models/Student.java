@@ -4,14 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Student implements Serializable {
-    public String username;
-    public String password;
+public class Student extends User implements Serializable {
     public boolean active = true;
     public List<String> loanIds = new ArrayList<>();
 
     public Student(String username, String password){
-        this.username = username; this.password = password;
+        super.username = username; super.password = password;
     }
 
     @Override

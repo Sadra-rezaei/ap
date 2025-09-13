@@ -1,4 +1,4 @@
-package ap.projects.finalproject;
+package ap.projects.finalproject.dataBase;
 
 import ap.projects.finalproject.models.Book;
 import ap.projects.finalproject.models.Employee;
@@ -9,7 +9,6 @@ import java.io.*;
 import java.util.*;
 
 public class DataStore implements Serializable {
-    private static final long serialVersionUID = 1L;
     public Map<String, Book> books = new HashMap<>();
     public Map<String, Student> students = new HashMap<>();
     public Map<String, Employee> employees = new HashMap<>();
@@ -35,6 +34,22 @@ public class DataStore implements Serializable {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public Map<String, Book> getBooks() {
+        return books;
+    }
+
+    public Map<String, Student> getStudents() {
+        return students;
+    }
+
+    public Map<String, Employee> getEmployees() {
+        return employees;
+    }
+
+    public Map<String, Loan> getLoans() {
+        return loans;
     }
 }
 
